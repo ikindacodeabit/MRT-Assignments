@@ -17,9 +17,9 @@ vehicles = [
     ]
 
 customers =[
-    {"c_id": "C01", "name":"Rahul", "contact_info":"rahul@xyz.com", "rental_history":{"#1":["MRT01", 10], "#2":["MRT03", 15],}, 'type':"R"},
-    {"c_id": "C02", "name":"Abhay", "contact_info":"abhay@xyz.com", "rental_history":{"#1":["MRT04", 40], "#2":["MRT01", 1], 'type':"R"}},
-    {"c_id": "C03", "name":"Rajesh", "contact_info":"rajesh@xyz.com", "rental_history":{"#1":["MRT09", 20], "#2":["MRT02", 105], 'type':"P"}}
+    {"c_id": "C01", "name":"Rahul", "contact_info":"rahul@xyz.com", "rental_history":{"#1":["MRT01", 10], "#2":["MRT03", 15],}, 'type':'R'},
+    {"c_id": "C02", "name":"Abhay", "contact_info":"abhay@xyz.com", "rental_history":{"#1":["MRT04", 40], "#2":["MRT01", 1]}, 'type':'R'},
+    {"c_id": "C03", "name":"Rajesh", "contact_info":"rajesh@xyz.com", "rental_history":{"#1":["MRT09", 20], "#2":["MRT02", 105]}, 'type':'P'}
 ]
 
 class Vehicle:
