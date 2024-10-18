@@ -314,6 +314,7 @@ class Customer:
         login(self.c_id)
 
     def filter(self, choice):
+        count = 0
         if choice == "1":
             print("Input minimum and maximum: ")
             minimum = input("Minimum: ")
@@ -323,7 +324,9 @@ class Customer:
                     if not(type(car) == LuxuryVehicle):
                         print(
                             f"Vehicle ID: {car.vehicle_id}, Make : {car.make}, Model : {car.model}, Year : {car.year}, Rental rate : {car.rental_rate}")
+                        count += 1
                     else:
+                        count += 1
                         print(
                             f"Vehicle ID: {car.vehicle_id}, Make : {car.make}, Model : {car.model}, Year : {car.year}, Rental rate : {car.rental_rate}, Luxury Feature: {car.extra_features}")
         elif choice == "2":
@@ -344,6 +347,7 @@ class Customer:
                 if car.availability:
                     if type(car) == LuxuryVehicle:
                         if car.extra_features == feature :
+                            count += 1
                             print(f"Vehicle ID: {car.vehicle_id}, Make : {car.make}, Model : {car.model}, Year : {car.year}, Rental rate : {car.rental_rate}, Luxury Feature: {car.extra_features}")
         elif choice == "3":
             print("The following are available makes of our vehicles: ")
@@ -373,9 +377,11 @@ class Customer:
             for car in cars:
                 if car.make == make:
                     if not(type(car) == LuxuryVehicle):
+                        count += 1
                         print(
                             f"Vehicle ID: {car.vehicle_id}, Make : {car.make}, Model : {car.model}, Year : {car.year}, Rental rate : {car.rental_rate}")
                     else:
+                        count += 1
                         print(
                             f"Vehicle ID: {car.vehicle_id}, Make : {car.make}, Model : {car.model}, Year : {car.year}, Rental rate : {car.rental_rate}, Luxury Feature: {car.extra_features}")
             if not(inp == '1' or inp == '2' or inp == '3' or inp == '4' or inp == '5' or inp == '6' or inp == '7'):
@@ -410,9 +416,11 @@ class Customer:
             for car in cars:
                 if car.year == year:
                     if not(type(car) == LuxuryVehicle):
+                        count += 1
                         print(
                             f"Vehicle ID: {car.vehicle_id}, Make : {car.make}, Model : {car.model}, Year : {car.year}, Rental rate : {car.rental_rate}")
                     else:
+                        count += 1
                         print(
                             f"Vehicle ID: {car.vehicle_id}, Make : {car.make}, Model : {car.model}, Year : {car.year}, Rental rate : {car.rental_rate}, Luxury Feature: {car.extra_features}")
             if not(inp == '1' or inp == '2' or inp == '3' or inp == '4' or inp == '5' or inp == '6' or inp == '7'):
@@ -432,15 +440,21 @@ class Customer:
             for car in cars:
                 if car.model == model:
                     if not(type(car) == LuxuryVehicle):
+                        count += 1
                         print(
                             f"Vehicle ID: {car.vehicle_id}, Make : {car.make}, Model : {car.model}, Year : {car.year}, Rental rate : {car.rental_rate}")
                     else:
+                        count += 1
                         print(
                             f"Vehicle ID: {car.vehicle_id}, Make : {car.make}, Model : {car.model}, Year : {car.year}, Rental rate : {car.rental_rate}, Luxury Feature: {car.extra_features}")
             if not(inp == '1' or inp == '2'):
                 print("Invalid Choice")
                 print("Try again")
                 self.filter(choice)
+        if count == 0:
+            print("No available vehicles for your search filters")
+            print("Try again")
+            self.filter(choice)
 
 class RegularCustomer(Customer):
     def __init__(self, c_id, name, contact_info, rental_history, renting, loyalty_points, c_type, date_rented):
@@ -582,7 +596,6 @@ def login(c_id):
         exit()
 
 if __name__ == "__main__":
-
     choice = input("Enter 1. for Customer login and 2. for Manager mode \n")
     if choice == '1':
         login()
