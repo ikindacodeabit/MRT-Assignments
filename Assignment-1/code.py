@@ -1,5 +1,5 @@
-"""Following is the data of vehicles and customers with their respective attributes. This data is to be gotten from a json
-file and then converted to respective objects but all that is being done here"""
+"""Code for the first assignment of the software subsystem of MRT. Python Tutorial. Aim: To get used to object-oriented programming and use of objects and classes.
+The goal is to make a working interface for a customer and manager of a rental service"""
 
 # Importing packages
 from datetime import datetime, date
@@ -7,6 +7,7 @@ import datetime
 from multipledispatch import dispatch
 from dateutil.relativedelta import relativedelta
 import time
+
 # Data of vehicles of the rental service
 vehicles = [
     {"vehicle_id": "MRT01", "make": 'Toyota', "model": "V1", "year": "2020", "rental_rate": 2000, "availability": False, "type":'R'},
@@ -30,10 +31,9 @@ customers =[
     {"c_id": "C01", "name":"Rahul", "contact_info":"rahul@xyz.com", "rental_history":{"#1":["MRT01", 10], "#2":["MRT03", 15],}, 'c_type':'R', 'renting':True, 'loyalty_points':5, 'date_rented':datetime.date(2024, 10, 12)},
     {"c_id": "C02", "name":"Abhay", "contact_info":"abhay@xyz.com", "rental_history":{"#1":["MRT04", 40], "#2":["MRT01", 1]}, 'c_type':'R', 'renting':True, 'loyalty_points':59, 'date_rented':datetime.date(2024, 10, 14)},
     {"c_id": "C03", "name":"Rajesh", "contact_info":"rajesh@xyz.com", "rental_history":{"#1":["MRT09", 20], "#2":["MRT02", 105]}, 'c_type':'P', 'renting':False, 'loyalty_points':370, 'date_rented':""},
-    {"c_id": "C04", "name":"Kunal", "contact_info": "rahul@xyz.com",
-     "rental_history": {"#1": ["MRT06", 140], "#2": ["MRT08", 15], }, 'c_type': 'R', 'renting': False,
-     'loyalty_points': 5, 'date_rented': date.today()}
-]
+    {"c_id": "C04", "name":"Kunal", "contact_info": "rahul@xyz.com", "rental_history": {"#1": ["MRT06", 140], "#2": ["MRT08", 15], }, 'c_type': 'R', 'renting': False,
+     'loyalty_points': 5, 'date_rented': date.today()},
+    ]
 
 # Vehicle class with class attribute vehicle_type = 'Car' and instance attributes for Vehicleid, Makke, Model, Year, Rental rate, Availability
 class Vehicle:
@@ -115,7 +115,7 @@ class Customer:
         elif choice == "3":
             if self.renting:
                 print("Please return your vehicle before renting again.")
-                time.sleep(2)
+                time.sleep(1)
                 login(self.c_id)
 
             else:
@@ -143,14 +143,13 @@ class Customer:
                     if self.c_type == 'P':
                         self.premium_rent(choice, int(duration))
                     self.renting = True
-                    time.sleep(1)
                     print(f"Your Loyalty points : {self.loyalty_points}")
                     print("Structure for Point Benefits: ")
-                    time.sleep(0.5)
+                    time.sleep(0.7)
                     print("For every 50 points, you can avail a 10% discount")
-                    time.sleep(0.5)
+                    time.sleep(0.7)
                     print("For every 500 points, you can avail a free rental")
-                    time.sleep(0.5)
+                    time.sleep(0.7)
                     if self.loyalty_points >= 50:
                         print("You are eligible for a discount/free rental based on above tariff")
                         print("Do you choose to avail it?")
@@ -246,7 +245,7 @@ class Customer:
                 print(f"{count}.{person.rental_history[list([last_vehicle])[-1]][0]}")
                 count += 1
                 delta = relativedelta(days=+person.rental_history[list([last_vehicle])[-1]][-1])
-                print(f"Due date : {self.date_rented + delta}")
+                print(f"Due date : {person.date_rented + delta}")
         choice = input("Choose a vehicle to rent (Enter its vehicle ID) : ")
         time_str = input("Enter time in this format yyyy-mm-dd : ")
         date = datetime.datetime.strptime(time_str, "%Y-%m-%d")
@@ -264,10 +263,11 @@ class Customer:
                             last_vehicle = list(person.rental_history)[-1]
                             if person.rental_history[list([last_vehicle])[-1]][0] == choice:
                                 delta = relativedelta(days=+person.rental_history[list([last_vehicle])[-1]][-1])
-                                due_date = self.date_rented + delta
+                                due_date = person.date_rented + delta
                                 if due_date > date.date():
                                     print(f"Your choice {choice} is not available at the date that you have chosen")
                                     print("Please choose another date")
+                                    time.sleep(1)
                                     self.reservation()
                                 else:
                                     print(f"{car.vehicle_id} has been successfully reserved")
@@ -486,14 +486,57 @@ class PremiumCustomer(Customer):
 
 
 class RentalManager:
+
+    def console(self):
+        print("MRT Rental Manager Master Console")
+        print("1. Generate list of available vehicles")
+        print("2. Generate report of vehicles in use and customer report")
+        print("3. Add a new vehicle to the fleet")
+        print("4. Remove a vehicle from the fleet")
+        print("5. Press Q to exit")
+        choice = input("Choose an option: ")
+        if choice == "1":
+            self.list_vehicles()
+            time.sleep(1)
+            self.console()
+        elif choice == "2":
+            self.generate_report()
+            time.sleep(1)
+            self.console()
+        elif choice == "3":
+            print("Enter the specifications of the new vehicle: ")
+            vehicle_id = input("Vehicle ID: ")
+            make = input("Make: ")
+            model = input("Model: ")
+            year = input("Year: ")
+            rental_rate = input("Rental Rate: ")
+            self.add_vehicle(vehicle_id, make, model, year, rental_rate)
+            time.sleep(1)
+            self.console()
+        elif choice == "4":
+            self.list_vehicles()
+            print("Enter the Vehicle ID  of the vehicle to be removed: ")
+            vehicle_id = input("Vehicle ID: ")
+            self.remove_vehicle(vehicle_id)
+            time.sleep(1)
+            self.console()
+        elif choice == "Q":
+            exit()
+        else:
+            print("Invalid Choice")
+            print("Try again")
+            time.sleep(1)
+            self.console()
+
+
     def list_vehicles(self):
         print("List of available Rental Vehicles")
         for i in vehicles:
             if i["availability"]:
                 print(f"{i['vehicle_id']} : {i['make']} : {i['model']}")
 
-    def add_vehicle(self, vehicle_id, make, model, year, rental_rate, availability):
-        vehicles.append({"vehicle_id": vehicle_id, "make": make, "model": model, "year": year, rental_rate: rental_rate, "availability": availability})
+    def add_vehicle(self, vehicle_id, make, model, year, rental_rate):
+        vehicles.append({"vehicle_id": vehicle_id, "make": make, "model": model, "year": year, rental_rate: rental_rate, "availability": True})
         print("Successfully added")
         response = input("Would you like to view the updated vehicle list [y/n] ?")
         if response == "y":
@@ -557,13 +600,13 @@ def login():
                 print("Invalid Customer ID or Name")
                 time.sleep(1)
                 print("Please try again")
-                time.sleep(2)
+                time.sleep(1)
                 login()
 
 
 @dispatch(str)
 def login(c_id):
-    time.sleep(3)
+    time.sleep(1.5)
     for person in people:
         if c_id == person.c_id:
             self = person
@@ -595,19 +638,13 @@ def login(c_id):
         print("Thank you for using MRT Rentals !")
         exit()
 
+
 if __name__ == "__main__":
+    # Console to choose customer or manager mode
     choice = input("Enter 1. for Customer login and 2. for Manager mode \n")
     if choice == '1':
         login()
     elif choice == '2':
         Manager = RentalManager()
-        Manager.list_vehicles()
-        time.sleep(2)# Working
-        Manager.generate_report()
-        time.sleep(2)# Working
-        Manager.add_vehicle('MRT20', 'Kia', 'V3', 2024, 7000, True)
-        time.sleep(2)# Working
-        Manager.remove_vehicle('MRT20') # Working
-    else:
-        print("Invalid Choice")
+        Manager.console()
 
