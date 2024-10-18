@@ -10,35 +10,51 @@ import time
 
 # Data of vehicles of the rental service
 vehicles = [
-    {"vehicle_id": "MRT01", "make": 'Toyota', "model": "V1", "year": "2020", "rental_rate": 2000, "availability": False, "type":'R'},
-    {"vehicle_id": "MRT02", "make": 'Honda', "model": "V1", "year": "2021", "rental_rate": 2000, "availability": True, "type":'R'},
-    {"vehicle_id": "MRT03", "make": 'Toyota', "model": "V1", "year": "2019", "rental_rate": 2000, "availability": False, "type":'R'},
+    {"vehicle_id": "MRT01", "make": 'Toyota', "model": "V1", "year": "2020", "rental_rate": 2000, "availability": False,
+     "type": 'R'},
+    {"vehicle_id": "MRT02", "make": 'Honda', "model": "V1", "year": "2021", "rental_rate": 2000, "availability": True,
+     "type": 'R'},
+    {"vehicle_id": "MRT03", "make": 'Toyota', "model": "V1", "year": "2019", "rental_rate": 2000, "availability": False,
+     "type": 'R'},
     {"vehicle_id": "MRT04", "make": 'Hyundai', "model": "V1", "year": "2014", "rental_rate": 1500,
-     "availability": True, "type":'R'},
-    {"vehicle_id": "MRT05", "make": 'Kia', "model": "V1", "year": "2022", "rental_rate": 3000, "availability": True, "type":'R'},
-    {"vehicle_id": "MRT06", "make": 'Toyota', "model": "V2", "year": "2021", "rental_rate": 2500, "availability": True, "type":'R'},
-    {"vehicle_id": "MRT07", "make": 'Maruti', "model": "V1", "year": "2018", "rental_rate": 1000, "availability": True, "type":'R'},
+     "availability": True, "type": 'R'},
+    {"vehicle_id": "MRT05", "make": 'Kia', "model": "V1", "year": "2022", "rental_rate": 3000, "availability": True,
+     "type": 'R'},
+    {"vehicle_id": "MRT06", "make": 'Toyota', "model": "V2", "year": "2021", "rental_rate": 2500, "availability": True,
+     "type": 'R'},
+    {"vehicle_id": "MRT07", "make": 'Maruti', "model": "V1", "year": "2018", "rental_rate": 1000, "availability": True,
+     "type": 'R'},
     {"vehicle_id": "MRT08", "make": 'Mercedes', "model": "V1", "year": "2021", "rental_rate": 5000,
-     "availability": True, "type":'L', "extra_features":'GPS'},
+     "availability": True, "type": 'L', "extra_features": 'GPS'},
     {"vehicle_id": "MRT09", "make": 'Mercedes', "model": "V2", "year": "2022", "rental_rate": 7000,
-     "availability": True, "type":'L', "extra_features":'GPS'},
-    {"vehicle_id": "MRT10", "make": 'Audi', "model": "V1", "year": "2023", "rental_rate": 10000, "availability": True, "type":'L', "extra_features":'Stereo System'},
-    ]
+     "availability": True, "type": 'L', "extra_features": 'GPS'},
+    {"vehicle_id": "MRT10", "make": 'Audi', "model": "V1", "year": "2023", "rental_rate": 10000, "availability": True,
+     "type": 'L', "extra_features": 'Stereo System'},
+]
 
 # Data of customers of the rental service
 
-customers =[
-    {"c_id": "C01", "name":"Rahul", "contact_info":"rahul@xyz.com", "rental_history":{"#1":["MRT01", 10], "#2":["MRT03", 15],}, 'c_type':'R', 'renting':True, 'loyalty_points':5, 'date_rented':datetime.date(2024, 10, 12)},
-    {"c_id": "C02", "name":"Abhay", "contact_info":"abhay@xyz.com", "rental_history":{"#1":["MRT04", 40], "#2":["MRT01", 1]}, 'c_type':'R', 'renting':True, 'loyalty_points':59, 'date_rented':datetime.date(2024, 10, 14)},
-    {"c_id": "C03", "name":"Rajesh", "contact_info":"rajesh@xyz.com", "rental_history":{"#1":["MRT09", 20], "#2":["MRT02", 105]}, 'c_type':'P', 'renting':False, 'loyalty_points':370, 'date_rented':""},
-    {"c_id": "C04", "name":"Kunal", "contact_info": "rahul@xyz.com", "rental_history": {"#1": ["MRT06", 140], "#2": ["MRT08", 15], }, 'c_type': 'R', 'renting': False,
+customers = [
+    {"c_id": "C01", "name": "Rahul", "contact_info": "rahul@xyz.com",
+     "rental_history": {"#1": ["MRT01", 10], "#2": ["MRT03", 15], }, 'c_type': 'R', 'renting': True,
+     'loyalty_points': 5, 'date_rented': datetime.date(2024, 10, 12)},
+    {"c_id": "C02", "name": "Abhay", "contact_info": "abhay@xyz.com",
+     "rental_history": {"#1": ["MRT04", 40], "#2": ["MRT01", 100]}, 'c_type': 'R', 'renting': True, 'loyalty_points': 59,
+     'date_rented': datetime.date(2024, 10, 14)},
+    {"c_id": "C03", "name": "Rajesh", "contact_info": "rajesh@xyz.com",
+     "rental_history": {"#1": ["MRT09", 20], "#2": ["MRT02", 105]}, 'c_type': 'P', 'renting': False,
+     'loyalty_points': 370, 'date_rented': ""},
+    {"c_id": "C04", "name": "Kunal", "contact_info": "rahul@xyz.com",
+     "rental_history": {"#1": ["MRT06", 140], "#2": ["MRT08", 15], }, 'c_type': 'R', 'renting': False,
      'loyalty_points': 5, 'date_rented': date.today()},
-    ]
+]
+
 
 # Vehicle class with class attribute vehicle_type = 'Car' and instance attributes for Vehicleid, Makke, Model, Year, Rental rate, Availability
 class Vehicle:
     vehicle_type = 'Car'
     global rent
+
     def __init__(self, vehicle_id, make, model, year, rental_rate, availability):
         self.vehicle_id = vehicle_id
         self.make = make
@@ -47,7 +63,7 @@ class Vehicle:
         self.rental_rate = rental_rate
         self.availability = availability
 
-# Function to print the details of a vehicle
+    # Function to print the details of a vehicle
     def print_vehicle(self):
         print(f"Your vehicle is : {self.vehicle_id}")
         print(f"Its Make is : {self.make}")
@@ -56,16 +72,17 @@ class Vehicle:
         print(f"Its Rental Rate is : {self.rental_rate}")
         print(f"Its Availability is : {self.availability}")
 
-# Function to return the rent of a vehicle
+    # Function to return the rent of a vehicle
     def rent_vehicle(self, rental_duration):
         rent = self.rental_rate * rental_duration
         return rent
 
-# Function to return required vehicle to the rental service
+    # Function to return required vehicle to the rental service
     def return_vehicle(self):
         self.availability = True
         print(f"Your vehicle has been successfully returned.")
         print(f"Thank you for choosing MRT Rentals.")
+
 
 # Child class of vehicle with extra features and higher rental rate
 class LuxuryVehicle(Vehicle):
@@ -73,6 +90,7 @@ class LuxuryVehicle(Vehicle):
         super().__init__(vehicle_id, make, model, year, rental_rate, availability)
         self.extra_features = extra_features
         self.rental_rate = rental_rate + rental_rate * 0.2
+
 
 # Class of customers with instance variables for Customer ID, Name, Contact Info, Rental History, Renting status, Loyalty points, Type, Date rented
 class Customer:
@@ -88,20 +106,20 @@ class Customer:
         self.date_rented = date_rented
         self.last_rent = int(list(self.rental_history.keys())[-1][-1])
 
-# Print the contact info, CID and Name of the customer
+    # Print the contact info, CID and Name of the customer
     def print_customer(self):
         print(f"Hello dear customer ! ")
         print(f"Your Customer ID is : {self.c_id}")
         print(f"Your Name is : {self.name}")
         print(f"Your Contact Info is : {self.contact_info}")
 
-# View the Rental history of the customer
+    # View the Rental history of the customer
     def view_history(self):
         print(f"Hello dear customer ! ")
         print(f"Your Customer ID is : {self.c_id}")
         print(f"Your Rental history is : {self.rental_history}")
 
-# Function to handle the queries of the customer from the login function
+    # Function to handle the queries of the customer from the login function
     def query_handler(self, choice):
         if choice == "1":
             print(f"Your Customer ID is : {self.c_id}")
@@ -123,9 +141,11 @@ class Customer:
                 for vehicle in vehicles:
                     if vehicle["availability"]:
                         if vehicle["type"] == "R":
-                            print(f"Vehicle ID: {vehicle["vehicle_id"]}, Make : {vehicle['make']}, Model : {vehicle['model']}, Year : {vehicle['year']}, Rental rate : {vehicle['rental_rate']}")
+                            print(
+                                f"Vehicle ID: {vehicle["vehicle_id"]}, Make : {vehicle['make']}, Model : {vehicle['model']}, Year : {vehicle['year']}, Rental rate : {vehicle['rental_rate']}")
                         else:
-                            print(f"Vehicle ID: {vehicle["vehicle_id"]}, Make : {vehicle['make']}, Model : {vehicle['model']}, Year : {vehicle['year']}, Rental rate : {vehicle['rental_rate']}, Luxury Feature: {vehicle['extra_features']}")
+                            print(
+                                f"Vehicle ID: {vehicle["vehicle_id"]}, Make : {vehicle['make']}, Model : {vehicle['model']}, Year : {vehicle['year']}, Rental rate : {vehicle['rental_rate']}, Luxury Feature: {vehicle['extra_features']}")
                 print("Do you want to apply any search filters?")
                 yn = input("y/n? : ")
                 if yn == "y":
@@ -221,7 +241,8 @@ class Customer:
                     if customer["c_id"] == self.c_id:
                         last_vehicle = list(customer["rental_history"])[-1]
                         print(customer["rental_history"][list([last_vehicle])[-1]][0])
-                        print(f"{customer["rental_history"][list([last_vehicle])[-1]][0]} has been successfully returned")
+                        print(
+                            f"{customer["rental_history"][list([last_vehicle])[-1]][0]} has been successfully returned")
                         print("Thank you for using MRT Rentals !")
                         login(self.c_id)
             else:
@@ -229,7 +250,8 @@ class Customer:
                 login(self.c_id)
         elif choice == "5":
             self.reservation()
-# Function to make reservations
+
+    # Function to make reservations
     def reservation(self):
         print("Here is a list of cars and dates of availability: ")
         count = 1
@@ -273,7 +295,8 @@ class Customer:
                                     print(f"{car.vehicle_id} has been successfully reserved")
                                     print("Thank you for using MRT Rentals !")
                                     login(self.c_id)
-# Self explanatory
+
+    # Self explanatory
     def rent(self):
         print("Enter the Vehicle ID of the vehicle you want to rent and duration of the rent")
         choice = input("Vehicle ID : ")
@@ -321,7 +344,7 @@ class Customer:
             maximum = input("Maximum: ")
             for car in cars:
                 if int(minimum) <= car.rental_rate <= int(maximum):
-                    if not(type(car) == LuxuryVehicle):
+                    if not (type(car) == LuxuryVehicle):
                         print(
                             f"Vehicle ID: {car.vehicle_id}, Make : {car.make}, Model : {car.model}, Year : {car.year}, Rental rate : {car.rental_rate}")
                         count += 1
@@ -346,9 +369,10 @@ class Customer:
             for car in cars:
                 if car.availability:
                     if type(car) == LuxuryVehicle:
-                        if car.extra_features == feature :
+                        if car.extra_features == feature:
                             count += 1
-                            print(f"Vehicle ID: {car.vehicle_id}, Make : {car.make}, Model : {car.model}, Year : {car.year}, Rental rate : {car.rental_rate}, Luxury Feature: {car.extra_features}")
+                            print(
+                                f"Vehicle ID: {car.vehicle_id}, Make : {car.make}, Model : {car.model}, Year : {car.year}, Rental rate : {car.rental_rate}, Luxury Feature: {car.extra_features}")
         elif choice == "3":
             print("The following are available makes of our vehicles: ")
             print("1. Toyota")
@@ -376,7 +400,7 @@ class Customer:
                 make = 'Audi'
             for car in cars:
                 if car.make == make:
-                    if not(type(car) == LuxuryVehicle):
+                    if not (type(car) == LuxuryVehicle):
                         count += 1
                         print(
                             f"Vehicle ID: {car.vehicle_id}, Make : {car.make}, Model : {car.model}, Year : {car.year}, Rental rate : {car.rental_rate}")
@@ -384,7 +408,7 @@ class Customer:
                         count += 1
                         print(
                             f"Vehicle ID: {car.vehicle_id}, Make : {car.make}, Model : {car.model}, Year : {car.year}, Rental rate : {car.rental_rate}, Luxury Feature: {car.extra_features}")
-            if not(inp == '1' or inp == '2' or inp == '3' or inp == '4' or inp == '5' or inp == '6' or inp == '7'):
+            if not (inp == '1' or inp == '2' or inp == '3' or inp == '4' or inp == '5' or inp == '6' or inp == '7'):
                 print("Invalid Choice")
                 print("Try again")
                 self.filter(choice)
@@ -415,7 +439,7 @@ class Customer:
                 year = '2023'
             for car in cars:
                 if car.year == year:
-                    if not(type(car) == LuxuryVehicle):
+                    if not (type(car) == LuxuryVehicle):
                         count += 1
                         print(
                             f"Vehicle ID: {car.vehicle_id}, Make : {car.make}, Model : {car.model}, Year : {car.year}, Rental rate : {car.rental_rate}")
@@ -423,7 +447,7 @@ class Customer:
                         count += 1
                         print(
                             f"Vehicle ID: {car.vehicle_id}, Make : {car.make}, Model : {car.model}, Year : {car.year}, Rental rate : {car.rental_rate}, Luxury Feature: {car.extra_features}")
-            if not(inp == '1' or inp == '2' or inp == '3' or inp == '4' or inp == '5' or inp == '6' or inp == '7'):
+            if not (inp == '1' or inp == '2' or inp == '3' or inp == '4' or inp == '5' or inp == '6' or inp == '7'):
                 print("Invalid Choice")
                 print("Try again")
                 self.filter(choice)
@@ -439,7 +463,7 @@ class Customer:
                 model = "V2"
             for car in cars:
                 if car.model == model:
-                    if not(type(car) == LuxuryVehicle):
+                    if not (type(car) == LuxuryVehicle):
                         count += 1
                         print(
                             f"Vehicle ID: {car.vehicle_id}, Make : {car.make}, Model : {car.model}, Year : {car.year}, Rental rate : {car.rental_rate}")
@@ -447,7 +471,7 @@ class Customer:
                         count += 1
                         print(
                             f"Vehicle ID: {car.vehicle_id}, Make : {car.make}, Model : {car.model}, Year : {car.year}, Rental rate : {car.rental_rate}, Luxury Feature: {car.extra_features}")
-            if not(inp == '1' or inp == '2'):
+            if not (inp == '1' or inp == '2'):
                 print("Invalid Choice")
                 print("Try again")
                 self.filter(choice)
@@ -456,6 +480,7 @@ class Customer:
             print("Try again")
             self.filter(choice)
 
+
 class RegularCustomer(Customer):
     def __init__(self, c_id, name, contact_info, rental_history, renting, loyalty_points, c_type, date_rented):
         super().__init__(c_id, name, contact_info, rental_history, renting, loyalty_points, c_type, date_rented)
@@ -463,11 +488,12 @@ class RegularCustomer(Customer):
     def rent(self, choice, duration):
         for car in cars:
             if car.vehicle_id == choice:
-                    self.availability = False
-                    rent = car.rent_vehicle(duration)
-                    print(f"Dear Customer, Thank you for choosing MRT Rentals.")
-                    print(f"Your Rental Rate is : {rent}")
-                    print(f"Your Customer ID is : {self.c_id}")
+                self.availability = False
+                rent = car.rent_vehicle(duration)
+                print(f"Dear Customer, Thank you for choosing MRT Rentals.")
+                print(f"Your Rental Rate is : {rent}")
+                print(f"Your Customer ID is : {self.c_id}")
+
 
 class PremiumCustomer(Customer):
     def __init__(self, c_id, name, contact_info, rental_history, renting, loyalty_points, c_type, date_rented):
@@ -476,13 +502,13 @@ class PremiumCustomer(Customer):
     def premium_rent(self, choice, duration):
         for car in cars:
             if car.vehicle_id == choice:
-                    self.availability = False
-                    rent = car.rent_vehicle(duration)
-                    rent = rent - 0.1 * rent
-                    print(f"Dear Customer, Thank you for choosing MRT Rentals.")
-                    print(f"Your Discounted Rental Rate is : {rent}")
-                    print(f"Original Rate was: {rent/0.9}")
-                    print(f"Your Customer ID is : {self.c_id}")
+                self.availability = False
+                rent = car.rent_vehicle(duration)
+                rent = rent - 0.1 * rent
+                print(f"Dear Customer, Thank you for choosing MRT Rentals.")
+                print(f"Your Discounted Rental Rate is : {rent}")
+                print(f"Original Rate was: {rent / 0.9}")
+                print(f"Your Customer ID is : {self.c_id}")
 
 
 class RentalManager:
@@ -528,7 +554,6 @@ class RentalManager:
             time.sleep(1)
             self.console()
 
-
     def list_vehicles(self):
         print("List of available Rental Vehicles")
         for i in vehicles:
@@ -536,7 +561,8 @@ class RentalManager:
                 print(f"{i['vehicle_id']} : {i['make']} : {i['model']}")
 
     def add_vehicle(self, vehicle_id, make, model, year, rental_rate):
-        vehicles.append({"vehicle_id": vehicle_id, "make": make, "model": model, "year": year, rental_rate: rental_rate, "availability": True})
+        vehicles.append({"vehicle_id": vehicle_id, "make": make, "model": model, "year": year, rental_rate: rental_rate,
+                         "availability": True})
         print("Successfully added")
         response = input("Would you like to view the updated vehicle list [y/n] ?")
         if response == "y":
@@ -557,7 +583,7 @@ class RentalManager:
         print(f"Vehicles In Use Report:")
         count = 0
         for vehicle in vehicles:
-            if not(vehicle[("availability")]):
+            if not (vehicle[("availability")]):
                 count += 1
                 print(f"{vehicle['vehicle_id']} : {vehicle['make']} : {vehicle['model']}")
 
@@ -573,15 +599,25 @@ cars = list()
 people = list()
 for vehicle in vehicles:
     if vehicle['type'] == 'R':
-        cars.append(Vehicle(vehicle["vehicle_id"], vehicle["make"], vehicle["model"], vehicle["year"], vehicle["rental_rate"], vehicle["availability"]))
+        cars.append(
+            Vehicle(vehicle["vehicle_id"], vehicle["make"], vehicle["model"], vehicle["year"], vehicle["rental_rate"],
+                    vehicle["availability"]))
     else:
-        cars.append(LuxuryVehicle(vehicle["vehicle_id"], vehicle["make"], vehicle["model"], vehicle["year"], vehicle["rental_rate"], vehicle["availability"], vehicle["extra_features"]))
+        cars.append(LuxuryVehicle(vehicle["vehicle_id"], vehicle["make"], vehicle["model"], vehicle["year"],
+                                  vehicle["rental_rate"], vehicle["availability"], vehicle["extra_features"]))
 
 for customer in customers:
     if customer['c_type'] == 'R':
-        people.append(RegularCustomer(customer["c_id"], customer["name"], customer["contact_info"], customer["rental_history"], customer["renting"], customer["loyalty_points"], customer["c_type"], customer["date_rented"]))
+        people.append(
+            RegularCustomer(customer["c_id"], customer["name"], customer["contact_info"], customer["rental_history"],
+                            customer["renting"], customer["loyalty_points"], customer["c_type"],
+                            customer["date_rented"]))
     else:
-        people.append(PremiumCustomer(customer["c_id"], customer["name"], customer["contact_info"], customer["rental_history"], customer["renting"], customer["loyalty_points"], customer["c_type"], customer["date_rented"]))
+        people.append(
+            PremiumCustomer(customer["c_id"], customer["name"], customer["contact_info"], customer["rental_history"],
+                            customer["renting"], customer["loyalty_points"], customer["c_type"],
+                            customer["date_rented"]))
+
 
 @dispatch()
 def login():
@@ -647,4 +683,3 @@ if __name__ == "__main__":
     elif choice == '2':
         Manager = RentalManager()
         Manager.console()
-
