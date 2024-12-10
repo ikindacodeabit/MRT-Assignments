@@ -1,0 +1,7 @@
+gazebo:
+  physics:
+    gravity: [0, 0, -9.81]
+    max_step_size: 0.001
+    real_time_update_rate: 1000.0
+  render_engine: "ogre2"
+
